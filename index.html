@@ -1,108 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title>Mass Trail Tracker</title>
-    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
     <!-- MapBox -->
-    <link href="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css" rel="stylesheet">
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
-    <script src='//d3js.org/d3.v3.min.js' charset='utf-8'></script>
-    <link rel="stylesheet" href="index.css">
-</head>
+    <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="index.css" />
+  </head>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6NGYW74M5H"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <!-- Google tag (gtag.js) -->
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-6NGYW7XXXXX"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
 
-  gtag('config', 'G-6NGYW74M5H');
-</script>
+    gtag("config", "G-6NGYW7XXXXX");
+  </script>
 
-<body>
+  <body>
     <div id="header">
-        <a href="/"><img id="logo" src="logo.svg" /></a>
-        <nav class="nav">
-            <!-- <a href="/about.html">About</a> -->
-        </nav>
+      <a href="/"><img id="logo" src="logo.svg" /></a>
+      <nav class="nav">
+        <!-- <a href="/about.html">About</a> -->
+      </nav>
     </div>
     <div id="map"></div>
     <div id="legend">
-        <div class="legend-entry">
-            <svg viewBox='0 0 10 10'>
-                <line x1='0' y1='10' x2='10' y2='0' stroke='#426a5a' stroke-width='2.5' />
-            </svg>
-            Paved
-        </div>
-        <div class="legend-entry">
-            <svg viewBox='0 0 10 10'>
-                <line x1='0' y1='10' x2='10' y2='0' stroke='#68A357' stroke-width='2.5' />
-            </svg>
-            Stone Dust
-        </div>
-        <div class="legend-entry">
-            <svg viewBox='0 0 10 10'>
-                <line x1='0' y1='10' x2='10' y2='0' stroke='#4d9de0' stroke-width='2.5' stroke-dasharray="6 2" />
-            </svg>
-            Protected/Unimproved
-        </div>
-        <div class="legend-entry">
-            <svg viewBox='0 0 10 10'>
-                <line x1='0' y1='10' x2='10' y2='0' stroke='#f28f3b' stroke-width='2.5' stroke-dasharray="1.5 1" />
-            </svg>
-            Under Construction
-        </div>
-        <div class="legend-entry">
-            <svg viewBox='0 0 10 10'>
-                <line x1='0' y1='10' x2='10' y2='0' stroke='#d7263d' stroke-width='2.5' stroke-dasharray="1.5 1" />
-            </svg>
-            Closed
-        </div>
+      <div class="legend-entry">
+        <svg viewBox="0 0 10 10">
+          <line
+            x1="0"
+            y1="10"
+            x2="10"
+            y2="0"
+            stroke="#426a5a"
+            stroke-width="2.5"
+          />
+        </svg>
+        Paved
+      </div>
+      <div class="legend-entry">
+        <svg viewBox="0 0 10 10">
+          <line
+            x1="0"
+            y1="10"
+            x2="10"
+            y2="0"
+            stroke="#68A357"
+            stroke-width="2.5"
+          />
+        </svg>
+        Stone Dust
+      </div>
+      <div class="legend-entry">
+        <svg viewBox="0 0 10 10">
+          <line
+            x1="0"
+            y1="10"
+            x2="10"
+            y2="0"
+            stroke="#4d9de0"
+            stroke-width="2.5"
+            stroke-dasharray="6 2"
+          />
+        </svg>
+        Protected/Unimproved
+      </div>
+      <div class="legend-entry">
+        <svg viewBox="0 0 10 10">
+          <line
+            x1="0"
+            y1="10"
+            x2="10"
+            y2="0"
+            stroke="#f28f3b"
+            stroke-width="2.5"
+            stroke-dasharray="1.5 1"
+          />
+        </svg>
+        Under Construction
+      </div>
+      <div class="legend-entry">
+        <svg viewBox="0 0 10 10">
+          <line
+            x1="0"
+            y1="10"
+            x2="10"
+            y2="0"
+            stroke="#d7263d"
+            stroke-width="2.5"
+            stroke-dasharray="1.5 1"
+          />
+        </svg>
+        Closed
+      </div>
     </div>
     <div id="modal">
-        <div>
-            <i>As of May 2023, I am still working on adding features to this website. There's more to come!</i>
-            <h3>Mission</h3>
-            To help you find:
-            <ul style="padding-left: 35px;">
-                <li>trails</li>
-                <li>local trail advocacy groups</li>
-                <li>information aboout trail construction (e.g. articles, press releases)</li>
-            </ul>
+      <div>
+        <i
+          >As of May 2023, I am still working on adding features to this
+          website. There's more to come!</i
+        >
+        <h3>Mission</h3>
+        To help you find:
+        <ul style="padding-left: 35px">
+          <li>trails</li>
+          <li>local trail advocacy groups</li>
+          <li>
+            information aboout trail construction (e.g. articles, press
+            releases)
+          </li>
+        </ul>
 
-            <h3>Additional Mapping Resources</h3>
-            <ul style="padding-left: 35px;">
-                <li><a href="https://trailmap.mapc.org/">Trail Map | MAPC</a></li>
-                <li>
-                    <a href="https://experience.arcgis.com/experience/75ad0564b18f48f5973657d65d2a775d/page/Page/">
-                        Massachusetts Priority Trails Network | MassDOT
-                    </a>
-                </li>
-                <li><a
-                        href="https://massdot.maps.arcgis.com/apps/webappviewer/index.html?id=76fc33869d534c6ba0b16803d25ee990">
-                        Bicycle Facility Inventory | MassDOT
-                    </a>
-                </li>
-                <li>
-                    <a href="https://masstrails.com/bigmap.html">Mass Trails</a>
-                </li>
-            </ul>
+        <h3>Additional Mapping Resources</h3>
+        <ul style="padding-left: 35px">
+          <li><a href="https://trailmap.mapc.org/">Trail Map | MAPC</a></li>
+          <li>
+            <a
+              href="https://experience.arcgis.com/experience/75ad0564b18f48f5973657d65d2a775d/page/Page/"
+            >
+              Massachusetts Priority Trails Network | MassDOT
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://massdot.maps.arcgis.com/apps/webappviewer/index.html?id=76fc33869d534c6ba0b16803d25ee990"
+            >
+              Bicycle Facility Inventory | MassDOT
+            </a>
+          </li>
+          <li>
+            <a href="https://masstrails.com/bigmap.html">Mass Trails</a>
+          </li>
+        </ul>
 
-            <h3>Contact</h3>
-            email me: <a href="mailto:mass.trail.tracker@gmail.com">mass.trail.tracker@gmail.com</a>
-            <br>
-            <br>
+        <h3>Contact</h3>
+        email me:
+        <a href="mailto:mass.trail.tracker@gmail.com"
+          >mass.trail.tracker@gmail.com</a
+        >
+        <br />
+        <br />
 
-            <hr><b>
-                The information presented here is not definitive. Trail conditions and the status of gaps can change
-                without being noted here.
-            </b>
-        </div>
+        <hr />
+        <b>
+          The information presented here is not definitive. Trail conditions and
+          the status of gaps can change without being noted here.
+        </b>
+      </div>
     </div>
-</body>
-<script src="index.js"></script>
-
+  </body>
+  <script src="index.js"></script>
 </html>
